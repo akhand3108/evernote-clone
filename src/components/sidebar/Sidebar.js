@@ -20,9 +20,15 @@ class Sidebar extends React.Component {
     if (notes) {
       return (
         <div className={classes.sidebarContainer}>
-          <Button onClick={this.newNoteBtnClick} className={classes.newNoteBtn}>
-            {this.state.addingNote ? "Cancel Note" : "Create Note "}
-          </Button>
+          <div className={classes.titleContainer}>
+            <span className={classes.title}>EveryNote</span>
+            <Button
+              onClick={this.newNoteBtnClick}
+              className={classes.newNoteBtn}
+            >
+              {this.state.addingNote ? "Cancel" : "New"}
+            </Button>
+          </div>
           {this.state.addingNote ? (
             <div>
               <input
@@ -35,7 +41,7 @@ class Sidebar extends React.Component {
                 className={classes.newNoteSubmitBtn}
                 onClick={this.newNote}
               >
-                Submit Button
+                Create
               </Button>
             </div>
           ) : null}

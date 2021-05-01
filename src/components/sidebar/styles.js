@@ -1,58 +1,65 @@
-const styles = theme => ({
+const styles = (theme) => ({
   root: {
     backgroundColor: theme.palette.background.paper,
-    height: 'calc(100% - 35px)',
-    position: 'absolute',
-    left: '0',
-    width: '300px',
-    boxShadow: '0px 0px 2px black'
+    height: "calc(100% - 35px)",
+    position: "absolute",
+    left: "0",
+    width: "300px",
+    boxShadow: "0px 0px 2px black",
   },
-  newChatBtn: {
-    borderRadius: '0px'
-  },
-  unreadMessage: {
-    color: 'red',
-    position: 'absolute',
-    top: '0',
-    right: '5px'
-  },
+
   newNoteBtn: {
-    width: '100%',
-    height: '35px',
-    borderBottom: '1px solid black',
-    borderRadius: '0px',
-    backgroundColor: '#29487d',
-    color: 'white',
-    '&:hover': {
-      backgroundColor: '#88a2ce'
-    }
+    width: "25%",
+    height: "35px",
+    borderBottom: "1px solid black",
+    borderRadius: "20px",
+    backgroundColor: "#6d597a",
+    color: "white",
+    "&:hover": {
+      backgroundColor: "#355070",
+    },
+  },
+  titleContainer: {
+    marginTop: "10px",
+    display: "flex",
+    justifyContent: "space-between",
+  },
+  title: {
+    marginLeft: "10px",
+    color: "#6d597a",
+    fontSize: "2rem",
+    fontWeight: "bold",
   },
   sidebarContainer: {
-    marginTop: '0px',
-    width: '300px',
-    height: '100%',
-    boxSizing: 'border-box',
-    float: 'left',
-    overflowY: 'scroll',
-    overflowX: 'hidden'
+    marginTop: "0px",
+    width: "300px",
+    height: "100%",
+    boxSizing: "border-box",
+    float: "left",
+    overflowY: "scroll",
+    overflowX: "hidden",
   },
   newNoteInput: {
-    width: '100%',
-    margin: '0px',
-    height: '35px',
-    outline: 'none',
-    border: 'none',
-    paddingLeft: '5px',
-    '&:focus': {
-      outline: '2px solid rgba(81, 203, 238, 1)'
-    }
+    width: "90%",
+    margin: "10px 5%",
+    height: "35px",
+    outline: "none",
+    border: "none",
+    paddingLeft: "5px",
+    "&:focus": {
+      outline: "2px solid rgba(81, 203, 238, 1)",
+    },
   },
   newNoteSubmitBtn: {
-    width: '100%',
-    backgroundColor: '#28787c',
-    borderRadius: '0px',
-    color: 'white'
-  }
-});
+    width: "50%",
+    margin: "10px 25%",
+    borderRadius: "5px",
+    backgroundColor: "#6d597a",
+    color: "white",
+    "&:hover": {
+      backgroundColor: "#355070",
+    },
+  },
+})
 
-export default styles;
+export default styles

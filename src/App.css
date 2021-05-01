@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
   height: 100%;
   width: 100%;
   box-sizing: border-box;
@@ -29,7 +30,7 @@ html, body {
   cursor: text;
 }
 .MuiListItem-root.Mui-selected {
-  background-color: #d4d8e8 !important;
+  background-color: #f3c4fb !important;
 }
 .no-note-selected {
   font-size: 48px;

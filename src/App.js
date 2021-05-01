@@ -16,7 +16,7 @@ class App extends React.Component {
 
   componentDidMount = () => {
     db.collection("notes")
-      .orderBy("createdAt", "asc")
+      .orderBy("createdAt", "desc")
       .onSnapshot((snap) => {
         const notes = snap.docs.map((doc) => {
           const data = doc.data()
@@ -58,7 +58,7 @@ class App extends React.Component {
     db.collection("notes").doc(id).update({
       title,
       body,
-      timestamp: getTimeStamp(),
+      updatedAt: getTimeStamp(),
     })
   }
 
@@ -67,6 +67,7 @@ class App extends React.Component {
       title: title,
       body: "",
       createdAt: getTimeStamp(),
+      updatedAt: getTimeStamp(),
     }
 
     const newCreated = await db.collection("notes").add(note)
@@ -81,30 +82,64 @@ class App extends React.Component {
     })
   }
 
-  deleteNote = async (note, deleteIndex) => {
-    console.log("deleted node index : ", deleteIndex)
-    console.log("selctednoteIndex : ", this.state.selectedNoteIndex)
+  // deleteNote = async (note, deleteIndex) => {
+
+  //   const newNotes = this.state.notes.filter((_note) => {
+  //     return _note !== note
+  //   })
+  //   console.log(deleteIndex, this.state.notes.indexOf(note))
+  //   await this.setState({
+  //     notes: newNotes,
+  //     selectedNoteIndex: this.state.selectedNoteIndex,
+  //     selectedNote: this.selectedNote,
+  //   })
+  //   console.log(
+  //     "ion delete: selected ,delete ",
+  //     this.state.selectedNoteIndex,
+  //     deleteIndex
+  //   )
+  //   if (this.state.selectedNoteIndex === deleteIndex) {
+  //     this.setState({ selectedNoteIndex: null, selectedNote: null })
+  //     console.log(
+  //       "selectedNoteIndex = deleteIndex ",
+  //       this.state.selectedNoteIndex,
+  //       deleteIndex
+  //     )
+  //   } else if (deleteIndex <= this.state.selectedNoteIndex) {
+  //     console.log("selctednoteIndex : ", this.state.selectedNoteIndex)
+  //     console.log("SelectedNote : ", this.state.selectedNote)
+  //     this.state.notes.length > 1
+  //       ? this.selectNote(
+  //           this.state.notes[this.state.selectedNoteIndex - 1],
+  //           this.state.selectedNoteIndex - 1
+  //         )
+  //       : this.setState({ selectedNoteIndex: null, selectedNote: null })
+
+  //     console.log("SelectedNoteIndex : ", this.state.selectedNoteIndex)
+  //     console.log("SelectedNote : ", this.state.selectedNote)
+  //   }
+
+  //   db.collection("notes").doc(note.id).delete()
+  // }
+
+  deleteNote = async (note) => {
+    const noteIndex = this.state.notes.indexOf(note)
+    const selectedNoteIndex = this.state.selectedNoteIndex
     await this.setState({
       notes: this.state.notes.filter((_note) => {
         return _note !== note
       }),
     })
-    console.log("deleted node index : ", deleteIndex)
-    console.log("selctednoteIndex : ", this.state.selectedNoteIndex)
-    if (this.state.selectedNoteIndex === deleteIndex) {
-      this.setState({ selectedNoteIndex: null, selectedNote: null })
-    } else {
-      console.log("selctednoteIndex : ", this.state.selectedNoteIndex)
-      console.log("SelectedNote : ", this.state.selectedNote)
-      this.state.notes.length > 1
-        ? this.selectNote(
-            this.state.notes[this.state.selectedNoteIndex - 1],
-            this.state.selectedNoteIndex - 1
-          )
-        : this.setState({ selectedNoteIndex: null, selectedNote: null })
 
-      console.log("SelectedNoteIndex : ", this.state.selectedNoteIndex)
-      console.log("SelectedNote : ", this.state.selectedNote)
+    if (selectedNoteIndex === noteIndex) {
+      this.selectNote(null, null)
+    } else if (noteIndex <= selectedNoteIndex) {
+      this.selectNote(
+        this.state.notes[selectedNoteIndex - 1],
+        selectedNoteIndex - 1
+      )
+    } else {
+      this.selectNote(this.state.notes[selectedNoteIndex], selectedNoteIndex)
     }
 
     db.collection("notes").doc(note.id).delete()
