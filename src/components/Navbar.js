@@ -73,7 +73,7 @@ const Navbar = ({ title, notes,id }) => {
           notes.map((note) => {
             return (
               
-                <SidebarItem selected={id} key={note.id} note={note} />
+                <SidebarItem selectedId={id} key={note.id} setIsDrawerOpened={setIsDrawerOpened} note={note} />
               
             )
           })}

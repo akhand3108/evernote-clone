@@ -13,13 +13,13 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
   },
 }));
-function SidebarItem({ note,selectedId }) {
+function SidebarItem({ note,selectedId,setIsDrawerOpened }) {
   const classes = useStyles();
   
 
   return (
     <Link key={note.id} to={"/" + note.id}>
-    <ListItem selected={selectedId === note.id} button className={classes.root}>
+    <ListItem onClick={()=>setIsDrawerOpened(false)} selected={selectedId === note.id} button className={classes.root}>
     <ListItemAvatar>
       <Avatar>
         <NotesIcon/>
