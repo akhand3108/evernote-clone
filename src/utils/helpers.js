@@ -11,3 +11,14 @@ export default function debounce(func, timeout = 300) {
 export function removeHTMLTags(str) {
   return str.replace(/<[^>]*>?/gm, "")
 }
+
+export const getFormattedDate = (timestamp) => {
+  const myDate = timestamp?.toDate()
+  const dateString =
+    myDate?.getDate() +
+    "/" +
+    (myDate?.getMonth() + 1) +
+    "/" +
+    myDate?.getFullYear()
+  return dateString
+}

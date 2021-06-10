@@ -8,6 +8,7 @@ import Typography from "@material-ui/core/Typography"
 import { Grid } from "@material-ui/core"
 import { Link } from "react-router-dom"
 import { db } from "../firebase/config"
+import {getFormattedDate} from  "../utils/helpers"
 
 const useStyles = makeStyles({
   root: {
@@ -28,16 +29,7 @@ const useStyles = makeStyles({
   },
 })
 
-const getFormattedDate = (timestamp) => {
-  const myDate = timestamp?.toDate()
-  const dateString =
-    myDate?.getDate() +
-    "/" +
-    (myDate?.getMonth() + 1) +
-    "/" +
-    myDate?.getFullYear()
-  return dateString
-}
+
 
 function NoteCard({ note }) {
   const classes = useStyles()

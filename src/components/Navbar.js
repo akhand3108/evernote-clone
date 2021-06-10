@@ -13,10 +13,10 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@material-ui/core"
-import { AccountCircleOutlined  } from "@material-ui/icons"
+import { AccountCircleOutlined, HomeRounded  } from "@material-ui/icons"
 import MenuIcon from "@material-ui/icons/Menu"
 
-import SidebarItem from "../SidebarItem"
+import SidebarItem from "./SidebarItem"
 
 const useStyles = makeStyles((theme) => ({
   menuButton: {
@@ -58,24 +58,26 @@ const Navbar = ({ title, notes,id }) => {
         </Toolbar>
       </AppBar>
       <Drawer variant="temporary" open={isDrawerOpened} onClose={closeDrawer}>
+      <List>
         <Link to="/">
-          <List>
+          
             <ListItem button key="About Us">
               <ListItemIcon>
-                <AccountCircleOutlined />
+                <HomeRounded />
               </ListItemIcon>
-              <ListItemText primary="About Us" />
+              <ListItemText primary="Home" />
             </ListItem>
-          </List>
+          
         </Link>
         {notes &&
           notes.map((note) => {
             return (
-              <Link key={note.id} to={"/" + note.id}>
-                <SidebarItem note={note} />
-              </Link>
+              
+                <SidebarItem selected={id} key={note.id} note={note} />
+              
             )
           })}
+          </List>
       </Drawer>
     </>
   )

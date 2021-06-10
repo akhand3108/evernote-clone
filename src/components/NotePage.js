@@ -1,4 +1,4 @@
-import { Button, ButtonGroup, Container, Grid ,Input} from "@material-ui/core"
+import { IconButton, Container, Grid ,Input,Box} from "@material-ui/core"
 import React, { useCallback, useEffect, useRef, useState } from "react"
 import MDEditor from "@uiw/react-md-editor"
 import Navbar from "./Navbar"
@@ -73,13 +73,10 @@ function NotePage({ notes }) {
 
       <Container>
         
-      <Grid container justify = "center">
-      <Input placeholder="Untitled" value={title} onChange={titleFieldHandler} />    
-      
-      <Button m={2} startIcon={<DeleteIcon/>} onClick={deleteDocument} variant="contained" color="secondary">
-        Delete
-      </Button>
-</Grid>
+      <Box display="flex" justifyContent="center" m={1} p={1} >
+      <Input  placeholder="Untitled" value={title} onChange={titleFieldHandler} />  
+      <IconButton color="secondary" aria-label="delete" onClick={deleteDocument}><DeleteIcon/></IconButton>
+</Box>
      
      
          
@@ -93,16 +90,19 @@ function NotePage({ notes }) {
           <Grid container spacing={6}>
             <Grid item xs={12} md={6}>
               <div>
-                <h3>Edit View</h3>
+                <h3 style={{color: "#FB8B24"}}>Edit View</h3>
 
                 <textarea
                   style={{
-                    fontSize: "1.5rem",
+                    fontSize: "1.2rem",
                     width: "100%",
                     height: "80vh",
                     resize: "none",
-                    padding: "20px",
+                    padding: "20px 40px",
                     outline: "none",
+                    color:"#D6D4A0",
+                    backgroundColor: "#140F2D"
+                    
                   }}
                   value={value}
                   onChange={(e) => editorChangeHandler(e)}
@@ -111,15 +111,17 @@ function NotePage({ notes }) {
             </Grid>
 
             <Grid item xs={12} md={6}>
-              <h3>Live Preview</h3>
+              <h3 style={{color: "#FF7733"}}>Live Preview</h3>
 
               <MDEditor.Markdown
                 style={{
                   border: "1px solid black",
                   width: "100%",
-
                   padding: "20px 10px",
                   height: "80vh",
+
+              color:"#D6D4A0",
+              backgroundColor: "#140F2D"
                 }}
                 source={value}
               />

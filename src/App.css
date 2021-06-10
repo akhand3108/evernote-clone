@@ -1,3 +1,6 @@
+
+
+
 * {
   box-sizing: border-box;
 }
@@ -8,4 +11,9 @@
 }
 .textSection {
   max-width: 85%;
+}
+
+
+html{
+background-color: #140F2D;
 }

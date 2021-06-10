@@ -1,10 +1,7 @@
-import { Button, ButtonGroup, Container, Grid } from "@material-ui/core"
-import React, { useEffect, useState } from "react"
-import debounce from "../utils/helpers"
+import {  Grid } from "@material-ui/core"
+import React, {  useState } from "react"
 import MDEditor from "@uiw/react-md-editor"
-import Navbar from "./Navbar"
-import { useHistory, useParams } from "react-router-dom"
-import { db, getTimeStamp } from "../firebase/config"
+
 import FormControlLabel from "@material-ui/core/FormControlLabel"
 import Switch from "@material-ui/core/Switch"
 
@@ -12,29 +9,30 @@ function NotePageMobile({ value, editorChangeHandler }) {
   const [previewView, setPreviewView] = useState(false)
   return (
     <>
-      <FormControlLabel
-        control={
+      <p style={{color:"#EB9486"}}>Live View
           <Switch
             checked={previewView}
             onChange={() => setPreviewView(!previewView)}
           />
-        }
-        label={previewView ? "Live View" : "Edit View"}
-      />
+        
+        Edit View  </p>    
       {/* <Button onClick={() => setPreviewView(!previewView)}>{previewView?"C"}</Button> */}
       {previewView ? (
         <Grid item xs={12} md={6}>
           <div>
-            <h3>Edit View</h3>
+                <h3 style={{color: "#FB8B24"}}>Edit View</h3>
 
             <textarea
               style={{
-                fontSize: "1.5rem",
+                fontSize: "1.2rem",
                 width: "100%",
                 height: "80vh",
                 resize: "none",
-                padding: "20px",
-                outline: "none",
+                padding: "10px 20px",
+                marginBottom: "40px",
+                outline: "none", color:"#D6D4A0",
+                backgroundColor: "#140F2D"
+                
               }}
               value={value}
               onChange={(e) => editorChangeHandler(e)}
@@ -43,15 +41,18 @@ function NotePageMobile({ value, editorChangeHandler }) {
         </Grid>
       ) : (
         <Grid item xs={12} md={6}>
-          <h3>Live Preview</h3>
+        <h3 style={{color: "#FF7733"}}>Live Preview</h3>
 
           <MDEditor.Markdown
             style={{
+              fontSize:"1.2rem",
               border: "1px solid black",
               width: "100%",
-
+              marginBottom: "40px",
               padding: "20px 10px",
               height: "80vh",
+              color:"#D6D4A0",
+              backgroundColor: "#140F2D"
             }}
             source={value}
           />
