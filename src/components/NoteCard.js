@@ -15,6 +15,8 @@ const useStyles = makeStyles({
     maxWidth: "100%",
     marginTop: 5,
     marginBottom: 5,
+    color: "#f9fafa",
+    backgroundColor: "#1a2634"
   },
   bullet: {
     display: "inline-block",
@@ -42,10 +44,10 @@ function NoteCard({ note }) {
     <Grid key={note.id} item xs={12} sm={4} md={3} lg={3}>
       <Card className={classes.root}>
         <CardContent>
-          <Typography color="textPrimary" variant="h5" component="h2">
+          <Typography color="primary" variant="h5" component="h2">
             {note?.title || "Untitled"}
           </Typography>
-          <Typography className={classes.pos} color="textSecondary">
+          <Typography className={classes.pos} color="secondary">
             {note && getFormattedDate(note?.updatedAt)}
           </Typography>
           <Typography variant="body2" noWrap component="p">
@@ -54,9 +56,9 @@ function NoteCard({ note }) {
         </CardContent>
         <CardActions>
           <Link to={"/" + note?.id}>
-            <Button size="small">View</Button>
+            <Button color="primary" size="small">View</Button>
           </Link>
-          <Button onClick={deleteNote} size="small">
+          <Button color="secondary" onClick={deleteNote} size="small">
             Delete
           </Button>
         </CardActions>
