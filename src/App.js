@@ -3,7 +3,8 @@ import { Switch, Route } from "react-router-dom"
 import "./App.css"
 import Home from "./components/Home"
 import { db} from "./firebase/config"
-import NotePage from "./components/NotePage"
+import EditPage from "./components/EditPage"
+import PublishedPage from "./components/PublishedPage"
 
 export default function App() {
   const [notes, setNotes] = useState(null)
@@ -28,10 +29,16 @@ export default function App() {
             return <Home notes={notes} />
           }}
         />
-        <Route
+        <Route exact
           path="/:id"
           render={() => {
-            return <NotePage notes={notes} />
+            return <EditPage notes={notes} />
+          }}
+        />
+        <Route exact
+          path="/:userName/:noteTag"
+          render={() => {
+            return <PublishedPage/>
           }}
         />
       </Switch>

@@ -58,6 +58,9 @@ function NoteCard({ note }) {
           <Link to={"/" + note?.id}>
             <Button color="primary" size="small">View</Button>
           </Link>
+          {note.published && <Link to={"/userName/" + note?.id}>
+            <Button color="primary" size="small">Preview</Button>
+          </Link>}
           <Button color="secondary" onClick={deleteNote} size="small">
             Delete
           </Button>

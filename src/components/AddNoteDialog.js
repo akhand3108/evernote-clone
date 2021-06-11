@@ -29,6 +29,7 @@ export default function AddNoteDialog(){
         body: "",
         createdAt: getTimeStamp(),
         updatedAt: getTimeStamp(),
+        published: false,
       }
       db.collection("notes")
         .add(note)

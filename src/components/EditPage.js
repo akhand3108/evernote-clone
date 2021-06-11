@@ -1,8 +1,8 @@
-import { IconButton, Container, Grid, Input, Box } from "@material-ui/core"
+import { IconButton, Container, Grid, Input, Box, Button } from "@material-ui/core"
 import React, { useCallback, useEffect, useRef, useState } from "react"
 import MDEditor from "@uiw/react-md-editor"
 import Navbar from "./Navbar"
-import { useHistory, useParams } from "react-router-dom"
+import { Link, useHistory, useParams } from "react-router-dom"
 import { db, getTimeStamp } from "../firebase/config"
 import DeleteIcon from '@material-ui/icons/Delete';
 import useMediaQuery from "@material-ui/core/useMediaQuery"
@@ -10,16 +10,16 @@ import debounce from "../utils/helpers"
 import Hidden from '@material-ui/core/Hidden';
 import Switch from "@material-ui/core/Switch"
 
-function NotePage({ notes }) {
+function EditPage({ notes }) {
   const [value, setValue] = useState("")
   const [title, setTitle] = useState("")
+  const [published,setPublished] = useState(false)
   const [note, setNote] = useState(null)
   const history = useHistory()
-  const isMobile = useMediaQuery("(max-width:980px)")
   const { id } = useParams()
+  const [previewView, setPreviewView] = useState(false)
   const delayedUpdate = useCallback(debounce((body) => updateDocument(body), 1500), [id])
   const delayedTitleUpdate = useCallback(debounce((title) => updateTitle(title), 1500), [id])
-  const [previewView, setPreviewView] = useState(false)
   useEffect(() => {
     db.collection("notes")
       .doc(id)
@@ -28,6 +28,7 @@ function NotePage({ notes }) {
         setNote(snap.data())
         setValue(snap.data().body)
         setTitle(snap.data().title)
+        setPublished(snap.data().published)
       })
   }, [id])
 
@@ -65,6 +66,16 @@ function NotePage({ notes }) {
   function editorChangeHandler(e) {
     setValue(e.target.value)
     delayedUpdate(e.target.value)
+  }
+
+  function togglePublishNote(){
+    db.collection("notes")
+      .doc(id)
+      .update({
+        published: !note.published
+      })
+      .then(()=>{console.log("Toggled")
+      setPublished(!published)})
   }
 
   return (
@@ -135,9 +146,13 @@ function NotePage({ notes }) {
 
           </Hidden>
         </Grid>
+        <Box display="flex" justifyContent="flex-end">
+          {published && <Link to={"/userName/"+id}>Check Preview</Link>}
+        <Button mx={20} size="small" variant="contained" color="primary" onClick={togglePublishNote}>{note?.published?"Unpublish":"Publish"}</Button>
+        </Box>
       </Container>
     </div>
   )
 }
 
-export default NotePage
+export default EditPage
