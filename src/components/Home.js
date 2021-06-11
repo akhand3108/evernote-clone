@@ -1,7 +1,7 @@
 import { Container, Grid } from "@material-ui/core"
 import AddNoteDialog from "./AddNoteDialog"
 import NoteCard from "./NoteCard"
-
+import removeMarkdown from "markdown-to-text";
 
 export default function Home({ notes }) {
   

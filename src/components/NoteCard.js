@@ -10,6 +10,8 @@ import { Link } from "react-router-dom"
 import { db } from "../firebase/config"
 import {getFormattedDate} from  "../utils/helpers"
 
+import removeMarkdown from "markdown-to-text";
+
 const useStyles = makeStyles({
   root: {
     maxWidth: "100%",
@@ -51,7 +53,7 @@ function NoteCard({ note }) {
             {note && getFormattedDate(note?.updatedAt)}
           </Typography>
           <Typography variant="body2" noWrap component="p">
-            {note?.body}
+            {removeMarkdown(note?.body)}
           </Typography>
         </CardContent>
         <CardActions>
